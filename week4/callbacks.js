@@ -30,7 +30,9 @@ let printAndUpdate = function(callback, number){
 
  //for every loop in the array execute a callback
 let myForEach = function(array, callback){
+  //loop through the array that is passed in
   for(let i=0; i<array.length; i++){
+    //and execute the callback function once for every element in the array
       callback(array[i],i)
   }
 }
@@ -40,3 +42,5 @@ let fruit = ['apple','banana','clementine'];
 myForEach(fruit,function(element){
   console.log(element);
 });
+
+
