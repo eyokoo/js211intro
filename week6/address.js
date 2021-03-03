@@ -14,65 +14,61 @@ getButton.addEventListener('click', function () {
 
   jsonResponse.then(function (json) {
     //print out the first name of the user
-    console.log("json =", json["results"]);
+    console.log(json.results);
     // console.log("Number of users", json.results.length);
 
     for (let i = 0; i <= json.results.length; i++) {
       console.log("list first name", json.results[i].name.first);
-      processUser(json, i)
+
+      //picture
+      const picDiv = document.createElement("div");
+
+      const picContent = document.createTextNode(json.results[i].picture.thumbnail);
+
+      picDiv.appendChild(picContent);
+
+      const currentPicDiv = document.getElementById("div1");
+
+      document.body.insertBefore(picDiv, currentPicDiv);
+
+
+
+      ///first name
+      const newDiv = document.createElement("div");
+
+      newDiv.setAttribute("id", "newDiv" + i)
+
+      //update the html page to list the users on the page
+      const newContent = document.createTextNode(json.results[i].name.first);
+
+      // add the text node to the newly created div
+      // add the text node to the div as a child element
+      newDiv.appendChild(newContent);
+
+      //finding where to put the content
+      const currentDiv = document.getElementById("div1");
+
+      document.body.insertBefore(newDiv, currentDiv);
+
+
+      ////address
+      newDiv.addEventListener('click', function () {
+
+        const newDivAddress = document.createElement("div");
+
+        const addressContent = document.createTextNode(json.results[i].email);
+
+        newDivAddress.appendChild(addressContent);
+
+        const currentDiv = document.getElementById("newDiv" + i);
+
+        currentDiv.parentNode.insertBefore(newDivAddress, currentDiv.nextSibling)
+
+      })
+
+
     }
 
   })
 
 })
-
-
-let processUser = function (user, id) {
-
-  const newDiv = document.createElement("div");
-
-  //update the html page to list the users on the page
-  const newContent = document.createTextNode(user.results[id].name.first);
-
-  // add the text node to the newly created div
-  // add the text node to the div as a child element
-  newDiv.appendChild(newContent);
-
-  //finding where to put the content
-  const currentDiv = document.getElementById("div");
-
-  document.body.insertBefore(newDiv, currentDiv);
-
-
-  const newButton = document.createElement("button");
-  const newContent2 = document.createTextNode("Get Address");
-  newButton.appendChild(newContent2);
-  document.body.insertBefore(newButton, currentDiv);
-
-
-
-  newButton.addEventListener('click', function () {
-
-    // console.log("this button was clicked")
-    processAddress(user.results[id].email)
-  })
-
-}
-
-
-let processAddress = function (email) {
-
-  // create new element
-  const addressDiv = document.createElement("div");
-
-  //update html page to list address
-  const addressContent = document.createTextNode(email);
-
-  //add the text node to the new div as a child element
-  addressDiv.appendChild(addressContent);
-
-  // find where to put the content
-  const appendAddress = document.getElementById("div1");
-
-  document.body.insertBefore(addressDiv, appendAddress);
-}
