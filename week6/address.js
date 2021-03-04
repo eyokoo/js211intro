@@ -21,11 +21,13 @@ getButton.addEventListener('click', function () {
       console.log("list first name", json.results[i].name.first);
 
       //picture
-      const picDiv = document.createElement("div");
+      const picDiv = document.createElement("img");
+      // element.setAttribute(attributename, attributevalue)
+      picDiv.setAttribute("src", json.results[i].picture.thumbnail)
 
-      const picContent = document.createTextNode(json.results[i].picture.thumbnail);
+      // const picContent = document.createTextNode(json.results[i].picture.thumbnail);
 
-      picDiv.appendChild(picContent);
+      // picDiv.appendChild(picContent);
 
       const currentPicDiv = document.getElementById("div1");
 
